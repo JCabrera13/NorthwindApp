@@ -1,0 +1,13 @@
+﻿@model IEnumerable<Product>
+<h3>Listado de produtos</h3>
+
+<table>
+    @foreach (var p in Model)
+    {
+<tr>
+    <td>@p.ProductName</td>
+    <td>@p.QuantityPerUnit</td>
+    <td>@p.UnitPrice</td>
+    <td>@p.UnitsInStock</td>
+</tr>}
+</table>
