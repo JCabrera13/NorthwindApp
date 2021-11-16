@@ -17,10 +17,10 @@ using System.Threading.Tasks;
             {
                 db = context;
             }
-            public async Task<IActionResult> Index()
+            public IActionResult Index()
             {
-                var listadoProductos = db.Products;
-                return View(await listadoProductos.ToListAsync());
+            var listadoProductos = db.Products.Include(p => p.Category).Include(p => p.Supplier);
+            return View(listadoProductos);    
             }
         }
     }

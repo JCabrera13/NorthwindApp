@@ -4,10 +4,15 @@
 <table>
     @foreach (var p in Model)
     {
-<tr>
-    <td>@p.ProductName</td>
-    <td>@p.QuantityPerUnit</td>
-    <td>@p.UnitPrice</td>
-    <td>@p.UnitsInStock</td>
-</tr>}
+    <tr>
+        <td>@p.ProductName</td>
+        <td>@p.QuantityPerUnit</td>
+        <td>@p.UnitPrice</td>
+        <td>@p.UnitsInStock</td>
+        <td>@p.Category.CategoryName</td>
+        <td>@p.Supplier.CompanyName</td>
+        <td>@p.Supplier.Phone</td>
+
+
+    </tr>}
 </table>
