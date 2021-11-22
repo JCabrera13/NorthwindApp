@@ -69,6 +69,7 @@ namespace NorthwindApp.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            //variable dinamica ViewData que esta disponible en todo momento, en el controlador y en la vista
             ViewData["ReportsTo"] = new SelectList(db.Employees, "EmployeeId", "FirstName", employee.ReportsTo);
             return View(employee);
         }

@@ -1,6 +1,10 @@
 ﻿@model IEnumerable<Product>
 <h3>Listado de produtos</h3>
 
+<p>
+    <a asp-action="NuevoProducto">Nuevo Producto</a>
+</p>
+
 <table>
     @foreach (var p in Model)
     {
@@ -16,3 +20,4 @@
 
     </tr>}
 </table>
+

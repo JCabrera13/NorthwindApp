@@ -1,0 +1,29 @@
+﻿@model IEnumerable<NorthwindApp.Models.Supplier>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="NuevoProveedor">Create Supplier</a>
+</p>
+<table class="table table-striped">
+    <tr>
+        <td>CompanyName</td>
+        <td>ContactName</td>
+        <td>ContactTitle</td>
+        <td>Phone</td>
+        <td>Country</td>
+    </tr>
+    @foreach (Supplier supplier in Model)
+    {
+<tr>
+    <td>@supplier.CompanyName</td>
+    <td>@supplier.ContactName</td>
+    <td>@supplier.ContactTitle</td>
+    <td>@supplier.Phone</td>
+    <td>@supplier.Country</td>
+</tr>}
+</table>

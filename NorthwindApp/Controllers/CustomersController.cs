@@ -30,18 +30,19 @@ namespace NorthwindApp.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //public IActionResult NuevoCliente(Customer customer)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        //agregar a la bd
+        [HttpPost]
+        public IActionResult NuevoCliente([Bind("CustomerId,CompanyName,ContactName,ContactTitle,Address,City,Region,PostalCode,Country,Phone,Fax")]Customer customer)
+        {
+            if (ModelState.IsValid)
+            {
+                //agregar a la bd
+                db.Add(customer);
+                db.SaveChanges();
 
-        //    }
-        //    else
-        //    {
-        //        return View(customer);
-        //    }
-        //}
+                return RedirectToAction("Index");
+            }
+            return View(customer);
+            
+        }
     }
 }

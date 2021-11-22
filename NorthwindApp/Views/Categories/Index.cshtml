@@ -1,0 +1,13 @@
+﻿@model IEnumerable<Category>
+
+<h3>Listado de categorías</h3>
+<a class="btn btn-primary" asp-action="NuevaCategoria">Nueva Categoría</a>
+<table class="table table-striped">
+    @foreach (var category in Model)
+    {
+<tr>
+    <td>@category.CategoryId</td>
+    <td>@category.CategoryName</td>
+    <td>@category.Description</td>
+</tr>}
+</table>

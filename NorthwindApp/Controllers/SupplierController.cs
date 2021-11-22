@@ -18,7 +18,26 @@ namespace NorthwindApp.Controllers
         public IActionResult Index()
         {
             var listadoSuppliers = db.Suppliers.ToList();
+            return View(db.Suppliers);
+        }
+
+        public IActionResult NuevoProveedor()
+        {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult NuevoProveedor(Supplier supplier)
+        {
+            if (ModelState.IsValid)
+            {
+                //guardar en la base de datos
+                db.Add(supplier);
+            }
+
+            return View(supplier);
+
+
         }
     }
 }
