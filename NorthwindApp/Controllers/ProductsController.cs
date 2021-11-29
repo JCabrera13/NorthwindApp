@@ -82,5 +82,38 @@ using System.Threading.Tasks;
             return View(product);
         }
 
+
+        public IActionResult EliminarProducto(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var producto = db.Products.Find(id);
+            ViewBag.Supplier = new SelectList(db.Suppliers, "SupplierId", "CompanyName");
+            ViewBag.Category = new SelectList(db.Categories, "CategoryId", "CategoryName");
+
+            if (producto == null)
+            {
+                return NotFound();
+            }
+
+            return View(producto);
+        }
+
+        [HttpPost]
+        public IActionResult ConfirmarEliminarProducto(int ProductId)
+        {
+            var product = db.Products.Find(ProductId);
+
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            db.Remove(product);
+            db.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
     }
     }
