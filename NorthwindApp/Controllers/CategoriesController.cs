@@ -86,14 +86,9 @@ namespace NorthwindApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult ConfirmacionEliminarCategoria(int? id)
+        public IActionResult ConfirmacionEliminarCategoria(int CategoryId)
         {
-            if(id == null)
-            {
-                return NotFound();
-            }
-
-            var categoria = db.Categories.Find(id);
+            var categoria = db.Categories.Find(CategoryId);
 
             if(categoria == null)
             {

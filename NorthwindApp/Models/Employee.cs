@@ -45,6 +45,6 @@ namespace NorthwindApp.Models
         public virtual Employee ReportsToNavigation { get; set; }
         public virtual ICollection<EmployeeTerritory> EmployeeTerritories { get; set; }
         public virtual ICollection<Employee> InverseReportsToNavigation { get; set; }
-        public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<Order> Orders { get; set ; }
     }
 }

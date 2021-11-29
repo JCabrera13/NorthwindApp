@@ -33,11 +33,50 @@ namespace NorthwindApp.Controllers
             {
                 //guardar en la base de datos
                 db.Add(supplier);
+                db.SaveChanges();
             }
 
-            return View(supplier);
-
+            return RedirectToAction("Index");
 
         }
+
+
+        public IActionResult EliminarProveedor(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var proveedor = db.Suppliers.Find(id);
+
+            if (proveedor == null)
+            {
+                return NotFound();
+            }
+
+            return View(proveedor);
+        }
+
+        public IActionResult ConfirmarEliminarProveedor(int SupplierId)
+        {
+            var proveedor = db.Suppliers.Find(SupplierId);
+            var productos = db.Products.Where(p => p.SupplierId == SupplierId).ToList();
+
+            if(productos == null)
+            {
+                if (proveedor == null)
+                {
+                    return NotFound();
+                }
+                db.Suppliers.Remove(proveedor);
+                db.SaveChanges();
+                return RedirectToAction(nameof(Index));
+            }
+
+            ViewBag.Mensaje = "No se puede eliminar el proveedor por que tiene asociados productos";
+            return View("EliminarProveedor",proveedor);
+          
+        }
+
     }
 }

@@ -83,6 +83,30 @@ namespace NorthwindApp.Controllers
             return View(customer);
         }
 
+        public IActionResult EliminarCliente (string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var cliente = db.Customers.Find(id);
+            if (cliente == null)
+            {
+                return NotFound();
+            }
+            return View(cliente);
+        }
+
+        [HttpPost]
+        public IActionResult ConfirmacionEliminarCliente(string CustomerId)
+        {
+
+            var cliente = db.Customers.Find(CustomerId);
+            db.Remove(cliente);
+            db.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
+        }
 
     }
 }

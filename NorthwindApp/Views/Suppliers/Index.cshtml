@@ -11,6 +11,7 @@
 </p>
 <table class="table table-striped">
     <tr>
+        <td>SupplierID</td>
         <td>CompanyName</td>
         <td>ContactName</td>
         <td>ContactTitle</td>
@@ -20,6 +21,7 @@
     @foreach (Supplier supplier in Model)
     {
 <tr>
+    <td>@supplier.SupplierId</td>
     <td>@supplier.CompanyName</td>
     <td>@supplier.ContactName</td>
     <td>@supplier.ContactTitle</td>
