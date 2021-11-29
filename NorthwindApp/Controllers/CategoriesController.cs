@@ -34,5 +34,75 @@ namespace NorthwindApp.Controllers
             }
             return View(category);
         }
+
+        public async Task<IActionResult> EditarCategoria(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var category = await db.Categories.FindAsync(id);
+            if (category == null)
+            {
+                return NotFound();
+            }
+            return View(category);
+        }
+
+        [HttpPost]
+        public IActionResult EditarCategoria(int id,Category category)
+        {
+            if (id != category.CategoryId)
+            {
+                return NotFound();
+            }
+            if (ModelState.IsValid)
+            {
+                //actualizar en la bd
+                db.Update(category);
+                db.SaveChanges();
+                return RedirectToAction(nameof(Index));
+            }
+
+
+            return View(category);
+        }
+
+        public IActionResult EliminarCategoria(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var categoria = db.Categories.Find(id);
+
+            if (categoria == null)
+            {
+                return NotFound();
+            }
+
+            return View(categoria);
+        }
+
+        [HttpPost]
+        public IActionResult ConfirmacionEliminarCategoria(int? id)
+        {
+            if(id == null)
+            {
+                return NotFound();
+            }
+
+            var categoria = db.Categories.Find(id);
+
+            if(categoria == null)
+            {
+                return NotFound();
+            }
+
+            db.Remove(categoria);
+            db.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

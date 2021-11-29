@@ -75,6 +75,7 @@ namespace NorthwindApp.Controllers
         }
 
         // GET: Employees/Edit/5
+        //endpoint que se encarga de mostrarnos una vista si es que el numero de id esta correcto.
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -94,6 +95,7 @@ namespace NorthwindApp.Controllers
         // POST: Employees/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //recibe todos los valores y lo actualiza.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("EmployeeId,LastName,FirstName,Title,TitleOfCourtesy,BirthDate,HireDate,Address,City,Region,PostalCode,Country,HomePhone,Extension,Photo,Notes,ReportsTo,PhotoPath")] Employee employee)

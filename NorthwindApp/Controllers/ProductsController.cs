@@ -47,5 +47,40 @@ using System.Threading.Tasks;
 
         }
 
+        public async Task<IActionResult> EditarProducto(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var product = await db.Products.FindAsync(id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+            ViewBag.Supplier = new SelectList(db.Suppliers, "SupplierId", "CompanyName");
+            ViewBag.Category = new SelectList(db.Categories, "CategoryId", "CategoryName");
+            return View(product);
+        }
+
+        [HttpPost]
+        public IActionResult EditarProducto(int id, [Bind()] Product product)
+        {
+            if (id != product.ProductId)
+            {
+                return NotFound();
+            }
+            if (ModelState.IsValid)
+            {
+                db.Update(product);
+                db.SaveChanges();
+                return RedirectToAction(nameof(Index));
+            }
+            ViewBag.Supplier = new SelectList(db.Suppliers, "SupplierId", "CompanyName");
+            ViewBag.Category = new SelectList(db.Categories, "CategoryId", "CategoryName");
+            return View(product);
+        }
+
     }
     }

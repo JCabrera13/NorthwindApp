@@ -44,5 +44,45 @@ namespace NorthwindApp.Controllers
             return View(customer);
             
         }
+
+        public IActionResult EditarCliente(string id)
+        {
+            if (id==null)
+            {
+                return NotFound();
+            }
+            var cliente = db.Customers.Find(id);
+            if (cliente == null)
+            {
+                return NotFound();
+            }
+            return View(cliente);
+        }
+
+        [HttpPost]
+        public IActionResult EditarCliente(string id, Customer customer)
+        {
+            
+            //se revisa si el id que se manda es el mismo al de la url
+            if (id != customer.CustomerId)
+            {
+                return NotFound();
+            }
+            //validar si el modelo recibido es valido
+            if (ModelState.IsValid)
+            {
+                //se mantiene en cola y se actualiza en la bd
+                db.Update(customer);
+                //se guardan cambios
+                db.SaveChanges();
+                //manda a index
+                return RedirectToAction(nameof(Index));
+            }
+
+
+            return View(customer);
+        }
+
+
     }
 }
